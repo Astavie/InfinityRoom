@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform sampler2D viewport;
+
+uniform vec4 from : hint_color;
+uniform vec4 to : hint_color;
+
+void fragment() {
+	vec3 col = texture(viewport, SCREEN_UV).rgb;
+	if (col == vec3(from.r, from.g, from.b))
+		ALBEDO = vec3(to.r, to.g, to.b);
+	else
+		ALBEDO = col;
+}
+"
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Player/RotationHelper/Viewport")
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/from = Color( 1, 1, 1, 1 )
+shader_param/to = Color( 0.827451, 0.0431373, 0.0431373, 1 )
+shader_param/viewport = SubResource( 2 )

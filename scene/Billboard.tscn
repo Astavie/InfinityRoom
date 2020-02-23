@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://script/billboard.gd" type="Script" id=1]
+[ext_resource path="res://font/NotoSans-Bold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=4]
+size = 240
+font_data = ExtResource( 2 )
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("Viewport")
+
+[node name="Billboard" type="Spatial"]
+script = ExtResource( 1 )
+font = SubResource( 4 )
+text = "Hello"
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 2048, 2048 )
+transparent_bg = true
+handle_input_locally = false
+hdr = false
+keep_3d_linear = true
+render_target_v_flip = true
+
+[node name="Label" type="Label" parent="Viewport"]
+margin_right = 2048.0
+margin_bottom = 2048.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Hello"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0009
+texture = SubResource( 3 )
